@@ -1,4 +1,5 @@
 October 2017
+  0.2.2  Added electron-settings
   0.2.1  scripts/ renamed to src/ 
   0.2.0  Fetching states using promises-based result sets
   0.1.1  Added bootstrap
