@@ -1,23 +1,20 @@
 import OracleDB from "oracledb";
 
 class Database {
-   constructor() {
-      console.log('Constructed');
+   constructor(user, password, connectString) {
+      this.user = user;
+      this.password = password;
+      this.connectString = connectString;
+
+      this.log('Constructed');
    }
 
-   static log(data){
+   log(data){
       console.log(data);
    }
 
-   /**
-    * [connect description]
-    * @param  {[type]} user          [description]
-    * @param  {[type]} password      [description]
-    * @param  {[type]} connectString [description]
-    * @return {[type]}               [description]
-    */
-   connect(user, password, connectString){
-      console.log('Connecting');
+   connect(){
+      this.log('Connecting');
 
        OracleDB.getConnection(
        {
@@ -110,5 +107,5 @@ class Database {
 
 }
 
-const db = new Database();
+const db = new Database('IDBI', 'IDBI1', 'svfe');
 db.connect();
