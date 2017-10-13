@@ -1,5 +1,6 @@
 import StatesService from 'atm-states'
 import settings from 'electron-settings'
+import { ipcRenderer as ipc} from 'electron'
 
 class StatesGraph{
   constructor(){
@@ -17,6 +18,18 @@ class StatesGraph{
   }
 
   /**
+   * [processStatesData description]
+   * @param  {[type]} data [description]
+   * @return {[type]}      [description]
+   */
+  processStatesData(data){
+    data.forEach( state => {
+      this.states.addState(state);
+    })
+    console.log('States data processed');
+  }
+
+  /**
    * [redraw description]
    * @return {[type]} [description]
    */
@@ -27,4 +40,8 @@ class StatesGraph{
 }
 
 var g = new StatesGraph();
-g.redraw();
+
+ipc.on('graph-update-states', (event, data) => {
+  g.processStatesData(data);
+  g.redraw();
+});

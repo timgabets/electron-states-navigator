@@ -29,6 +29,7 @@ class Database {
           return this.fetchFromResultSet(connection, resultSet, numRows);
         } else {
           ipc.send('db-states-data-fetched', this.rows);
+          this.log('Data fetched, connection closed');
           return connection.close();
         }
       })

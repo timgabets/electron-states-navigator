@@ -21,6 +21,5 @@ app.on('ready', () => {
 });
 
 ipc.on('db-states-data-fetched', (event, data) => {
-  console.log(data.length);
   window.webContents.send('graph-update-states', data)
 })

@@ -1,4 +1,5 @@
 October 2017
+  0.2.5  Processing states data in StatesGraph
   0.2.4  Sending ipc event message to the main process when all the data fetched
   0.2.3  Added atm-states
   0.2.2  Added electron-settings
