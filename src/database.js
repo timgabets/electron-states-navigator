@@ -1,4 +1,4 @@
-import OracleDB from "oracledb";
+import OracleDB from 'oracledb';
 
 class Database {
   constructor(user, password, connectString) {
@@ -74,4 +74,4 @@ class Database {
 }
 
 const db = new Database('IDBI', 'IDBI1', 'svfe');
-db.fetch(107);
+//db.fetch(107);
