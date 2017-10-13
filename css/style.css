@@ -1,0 +1,9 @@
+.mynetwork {
+  width: 700px;
+  height: 480px;
+  border: 1px solid darkgrey;
+  border-radius: 5px;
+  margin-left: 15px;
+  display:inline-block;
+  margin-right:10px;
+}

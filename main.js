@@ -9,7 +9,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  window = new BrowserWindow({width: 800, height: 600});
+  window = new BrowserWindow({width: 1280, height: 700});
   window.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
