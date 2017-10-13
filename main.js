@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain as ipc} from 'electron'
 
 let window = null;
 
@@ -19,3 +19,8 @@ app.on('ready', () => {
     window = null;
   });
 });
+
+ipc.on('db-states-data-fetched', (event, data) => {
+  console.log(data.length);
+  window.webContents.send('graph-update-states', data)
+})

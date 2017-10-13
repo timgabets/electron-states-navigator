@@ -1,4 +1,5 @@
-import OracleDB from 'oracledb';
+import OracleDB from 'oracledb'
+import { ipcRenderer as ipc} from 'electron'
 
 class Database {
   constructor(user, password, connectString) {
@@ -6,6 +7,7 @@ class Database {
     this.password = password;
     this.connectString = connectString;
     this.numRows = 200; // Number of rows to fetch at once
+    this.rows = [];
   };
 
   log(data){
@@ -23,9 +25,10 @@ class Database {
     resultSet.getRows(numRows)
       .then( rows => {
         if(rows.length > 0){
-          console.log(rows);
+          this.rows.push.apply(this.rows, rows);   // Appending all the rows elements to this.rows
           return this.fetchFromResultSet(connection, resultSet, numRows);
         } else {
+          ipc.send('db-states-data-fetched', this.rows);
           return connection.close();
         }
       })
@@ -40,6 +43,7 @@ class Database {
    * @return {[type]}      [description]
    */
   fetch(luno){
+    this.rows = [];
     OracleDB.getConnection(
       {
         user          : this.user,
@@ -66,12 +70,13 @@ class Database {
             console.error(err.message);
             return connection.close();
           });
+
       })
       .catch( err => {
         console.error(err.message);
-      });
+      });      
   }
 }
 
 const db = new Database('IDBI', 'IDBI1', 'svfe');
-//db.fetch(107);
+db.fetch(107);
