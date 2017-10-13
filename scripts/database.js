@@ -1,6 +1,7 @@
+import OracleDB from "oracledb";
 
 class Database {
-   constructor() {
+   constructor(user, password, connectString) {
       console.log('Constructed');
    }
 
@@ -16,4 +17,3 @@ class Database {
 }
 
 const db = new Database();
-
