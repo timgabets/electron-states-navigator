@@ -5,12 +5,40 @@ class Database {
     this.user = user;
     this.password = password;
     this.connectString = connectString;
+    this.numRows = 200; // Number of rows to fetch at once
   };
 
   log(data){
     console.log(data);
   };
 
+  /**
+   * [fetchFromResultSet description]
+   * @param  {[type]} connection [description]
+   * @param  {[type]} resultSet  [description]
+   * @param  {[type]} numRows    [description]
+   * @return {[type]}            [description]
+   */
+  fetchFromResultSet(connection, resultSet, numRows){
+    resultSet.getRows(numRows)
+      .then( rows => {
+        if(rows.length > 0){
+          console.log(rows);
+          return this.fetchFromResultSet(connection, resultSet, numRows);
+        } else {
+          return connection.close();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  /**
+   * [fetch description]
+   * @param  {[type]} luno [description]
+   * @return {[type]}      [description]
+   */
   fetch(luno){
     OracleDB.getConnection(
       {
@@ -25,28 +53,22 @@ class Database {
           "FROM st_tab " +
           "WHERE luno = :luno",
           [luno],
-          /*
           {
             resultSet: true, // return a result set.  Default is false
-            prefetchRows: 25 // the prefetch size can be set for each query
+            prefetchRows: this.numRows // the prefetch size can be set for each query
           }
-          */
         )
           .then( result => {
-            // this.log(result.metaData);
-            this.log(result.rows);
             //this.log(result.resultSet);
-
-            return connection.close();
+            return this.fetchFromResultSet(connection, result.resultSet, this.numRows);
           })
           .catch( err => {
-            this.log(err.message);
-
+            console.error(err.message);
             return connection.close();
           });
       })
       .catch( err => {
-        this.error(err.message);
+        console.error(err.message);
       });
   }
 }

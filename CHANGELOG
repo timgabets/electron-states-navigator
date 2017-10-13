@@ -1,3 +1,4 @@
 October 2017
+   0.2.0 	Fetching states using promises-based result sets
    0.1.1    Added bootstrap
    0.1.0    Initial commit
