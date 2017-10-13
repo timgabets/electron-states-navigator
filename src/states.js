@@ -30,10 +30,51 @@ class StatesGraph{
   }
 
   /**
+   * [getNodes prepare graph nodes and apply some styles]
+   * @return {[type]} [description]
+   */
+  getNodes(){
+    this.nodes = this.states.getNodes();
+    this.nodes.forEach(node => {
+      node['size'] = 160;
+      node['color'] = 'silver';
+      node['shape'] = 'box';
+      node['font'] = {'size': '32', 'face': 'monospace', 'align': 'center'};
+      node['heightConstraint'] = { minimum: 100 };
+      node['widthConstraint'] = { minimum: 100 };
+    })
+  }
+
+  /**
+   * [getEdges prepare graph edges and apply some styles]
+   * @return {[type]} [description]
+   */
+  getEdges(){
+    this.edges = this.states.getEdges()
+    this.edges.forEach( edge => {
+      edge['arrows'] = 'to';
+      edge['physics'] = false;
+      edge['smooth'] = {'type': 'cubicBezier'};
+    });
+  }
+
+  /**
    * [redraw description]
    * @return {[type]} [description]
    */
   redraw(){
+    this.getNodes();
+    this.getEdges();
+
+    this.container = document.getElementById('mynetwork');
+    /*
+    this.graph = new vis.Network(
+      this.container, 
+      {'nodes': this.nodes, 'edges': this.edges}, 
+      this.options
+    );
+    */
+
     console.log('Redraw event');
   }
 
