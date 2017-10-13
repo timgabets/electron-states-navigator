@@ -5,8 +5,6 @@ class Database {
     this.user = user;
     this.password = password;
     this.connectString = connectString;
-
-   this.log('Constructed');
   };
 
   log(data){
@@ -23,7 +21,7 @@ class Database {
       .then(function(connection) {
         console.log('Connected');
         return connection.execute(
-          "SELECT st_no, st_type, st_e1, st_e2, st_e3, st_e4, st_e5, st_e6, st_e7, st_e8, sset " +
+          "SELECT st_no, st_type, st_e1, st_e2, st_e3, st_e4, st_e5, st_e6, st_e7, st_e8 " +
           "FROM st_tab " +
           "WHERE luno = :luno",
           [luno],
