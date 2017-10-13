@@ -18,9 +18,9 @@ class Database {
 
        OracleDB.getConnection(
        {
-         user          : "IDBI",
-         password      : "IDBI1",
-         connectString : "svfe"
+         user          : this.user,
+         password      : this.password,
+         connectString : this.connectString
        },
        function(err, connection)
        {
@@ -56,10 +56,6 @@ class Database {
            });
        });
       };
-
-   fetch(){
-
-   };
 
   static fetchRowsFromRS(connection, resultSet, numRows)
   {
