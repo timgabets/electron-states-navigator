@@ -1,6 +1,7 @@
 import StatesService from 'atm-states'
 import settings from 'electron-settings'
 import { ipcRenderer as ipc} from 'electron'
+import vis from 'vis'
 
 class StatesGraph{
   constructor(){
@@ -58,6 +59,17 @@ class StatesGraph{
     });
   }
 
+  center(state_number){
+    if(!state_number)
+      state_number = '000'
+
+    this.graph.focus(
+      state_number, 
+      { scale: 0.3, offset: {} }
+    );  
+    this.graph.selectNodes([state_number,]);
+  }
+
   /**
    * [redraw description]
    * @return {[type]} [description]
@@ -67,15 +79,13 @@ class StatesGraph{
     this.getEdges();
 
     this.container = document.getElementById('mynetwork');
-    /*
     this.graph = new vis.Network(
       this.container, 
       {'nodes': this.nodes, 'edges': this.edges}, 
       this.options
     );
-    */
 
-    console.log('Redraw event');
+    this.center();
   }
 
 }

@@ -1,6 +1,6 @@
 {
   "name": "electron-states-navigator",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "main": "main.js",
   "repository": "https://github.com/timgabets/electron-states-navigator.git",
   "scripts": {
@@ -18,7 +18,8 @@
     "babel-register": "^6.26.0",
     "bootstrap": "^3.3.7",
     "electron-settings": "^3.1.2",
-    "oracledb": "^1.13.1"
+    "oracledb": "^1.13.1",
+    "vis": "^4.21.0"
   },
   "devDependencies": {
     "electron": "^1.4.3"
