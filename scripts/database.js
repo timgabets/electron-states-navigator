@@ -18,28 +18,35 @@ class Database {
         password      : this.password,
         connectString : this.connectString
       })
-      .then(function(connection) {
-        console.log('Connected');
+      .then( connection => {
+        this.log('Connected');
         return connection.execute(
           "SELECT st_no, st_type, st_e1, st_e2, st_e3, st_e4, st_e5, st_e6, st_e7, st_e8 " +
           "FROM st_tab " +
           "WHERE luno = :luno",
           [luno],
+          /*
+          {
+            resultSet: true, // return a result set.  Default is false
+            prefetchRows: 25 // the prefetch size can be set for each query
+          }
+          */
         )
-          .then(function(result) {
-            // console.log(result.metaData);
-            console.log(result.rows);
+          .then( result => {
+            // this.log(result.metaData);
+            this.log(result.rows);
+            //this.log(result.resultSet);
 
             return connection.close();
           })
-          .catch(function(err) {
-            console.log(err.message);
+          .catch( err => {
+            this.log(err.message);
 
             return connection.close();
           });
       })
-      .catch(function(err) {
-        console.error(err.message);
+      .catch( err => {
+        this.error(err.message);
       });
   }
 }
